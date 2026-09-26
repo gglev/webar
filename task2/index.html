@@ -33,7 +33,8 @@ cat << 'EOF'> task2/index.html
     <body>
         <div id="overlay">Наведите камеру на карточку card.png</div>
 
-        <a-scene mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes;"
+        <a-scene
+            mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; filterMinCF: 0.0001; filterBeta: 0.001; missTolerance: 5;"
             color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
             device-orientation-permission-ui="enabled: false">
 
