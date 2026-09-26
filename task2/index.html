@@ -1,74 +1,56 @@
-<!DOCTYPE html>
-<html lang="ru">
+cat << 'EOF'> task2/index.html
+    <!DOCTYPE html>
+    <html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Задание 1 — model-viewer</title>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WebAR Task 2 - MindAR Image Tracking</title>
+        <!-- Подключаем совместимые версии A-Frame и MindAR -->
+        <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
 
-    <!-- Google model-viewer компонент -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+            #overlay {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.75);
+                color: white;
+                padding: 10px 18px;
+                border-radius: 20px;
+                font-family: sans-serif;
+                font-size: 14px;
+                pointer-events: none;
+                z-index: 1000;
+            }
+        </style>
+    </head>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <body>
+        <div id="overlay">Наведите камеру на карточку card.png</div>
 
-        body,
-        html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #121212;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+        <a-scene mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes;"
+            color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+            device-orientation-permission-ui="enabled: false">
 
-        model-viewer {
-            width: 100%;
-            height: 100%;
-            --poster-color: transparent;
-        }
+            <a-assets>
+                <a-asset-item id="helmetModel" src="./assets/model.glb"></a-asset-item>
+            </a-assets>
 
-        #ar-button {
-            background-color: #ffffff;
-            color: #0f172a;
-            border-radius: 28px;
-            border: none;
-            position: absolute;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 14px 26px;
-            font-size: 15px;
-            font-weight: 700;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            -webkit-tap-highlight-color: transparent;
-            white-space: nowrap;
-        }
+            <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-        #ar-button:active {
-            background-color: #e2e8f0;
-        }
-    </style>
-</head>
+            <a-entity mindar-image-target="targetIndex: 0">
+                <!-- Модель шлема: масштаб и позиция подобраны под маркер -->
+                <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.3 0.3 0.3" src="#helmetModel">
+                </a-gltf-model>
+            </a-entity>
+        </a-scene>
+    </body>
 
-<body>
-
-    <model-viewer src="assets/model.glb" ios-src="assets/model.usdz" alt="Алмазный шлем Minecraft" ar
-        ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor" camera-controls
-        touch-action="pan-y" auto-rotate shadow-intensity="1.5" shadow-softness="0.8"
-        environment-image="assets/environment.hdr" exposure="1.1">
-        <button slot="ar-button" id="ar-button">
-            Посмотреть шлем в AR
-        </button>
-    </model-viewer>
-
-</body>
-
-</html>
+    </html>
+    EOF
