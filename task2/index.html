@@ -1,6 +1,6 @@
 cat << 'EOF'> task2/index.html
     <!DOCTYPE html>
-    <html>
+    <html lang="ru">
 
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +22,7 @@ cat << 'EOF'> task2/index.html
                 color: white;
                 padding: 10px 18px;
                 border-radius: 20px;
-                font-family: sans-serif;
+                font-family: -apple-system, BlinkMacSystemFont, sans-serif;
                 font-size: 14px;
                 pointer-events: none;
                 z-index: 1000;
@@ -31,7 +31,7 @@ cat << 'EOF'> task2/index.html
     </head>
 
     <body>
-        <div id="overlay">Наведите камеру на карточку card.png</div>
+        <div id="overlay">Наведите камеру на маркер</div>
 
         <a-scene
             mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; filterMinCF: 0.0001; filterBeta: 0.001; missTolerance: 5;"
