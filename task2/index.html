@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Задание 1 — model-viewer</title>
+
+    <!-- Google model-viewer компонент -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #121212;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
+
+        #ar-button {
+            background-color: #ffffff;
+            color: #0f172a;
+            border-radius: 28px;
+            border: none;
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 14px 26px;
+            font-size: 15px;
+            font-weight: 700;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            -webkit-tap-highlight-color: transparent;
+            white-space: nowrap;
+        }
+
+        #ar-button:active {
+            background-color: #e2e8f0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <model-viewer src="assets/model.glb" ios-src="assets/model.usdz" alt="Алмазный шлем Minecraft" ar
+        ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor" camera-controls
+        touch-action="pan-y" auto-rotate shadow-intensity="1.5" shadow-softness="0.8"
+        environment-image="assets/environment.hdr" exposure="1.1">
+        <button slot="ar-button" id="ar-button">
+            Посмотреть шлем в AR
+        </button>
+    </model-viewer>
+
+</body>
+
+</html>

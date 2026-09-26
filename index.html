@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа: WebAR</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #0f172a;
+            color: #f8fafc;
+            text-align: center;
+            padding: 24px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        a {
+            display: block;
+            padding: 16px 20px;
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+            transition: background 0.15s ease, transform 0.1s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a:active {
+            background: #1d4ed8;
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>WebAR Showcase</h1>
+    <p>Minecraft Diamond Helmet</p>
+    <div class="nav-container">
+        <a href="task1/">Задание 1 </a>
+        <a href="task2/">Задание 2 </a>
+    </div>
+</body>
+
+</html>
