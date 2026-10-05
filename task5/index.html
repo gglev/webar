@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>WebAR Task 5 - Three.js PBR, UI & Controls</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #000;
+    }
+    #overlay-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* чтобы тапы сквозь оверлей шли в сцену */
+      z-index: 10;
+    }
+    #status-msg {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(18, 18, 18, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 24px;
+      font-size: 14px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+    #ar-ui {
+      display: none; /* появится после размещения объекта */
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      pointer-events: auto; /* кнопки кликабельны */
+    }
+    .ar-btn {
+      background: rgba(28, 28, 30, 0.85);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .ar-btn:active {
+      transform: scale(0.94);
+      background: rgba(44, 44, 46, 0.95);
+    }
+    .ar-btn.active {
+      background: #007aff;
+      border-color: #58a6ff;
+    }
+  </style>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="overlay-container">
+    <div id="status-msg">Нажмите START AR для запуска</div>
+    <div id="ar-ui">
+      <button id="btn-color" class="ar-btn">🎨 Цвет</button>
+      <button id="btn-rotate" class="ar-btn">🔄 Вращение</button>
+      <button id="btn-model" class="ar-btn">📦 Модель</button>
+    </div>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
