@@ -39,7 +39,8 @@
 
   <div id="info">Посмотрите в фронтальную камеру</div>
 
-  <a-scene mindar-face="filterMinCF: 0.001; filterBeta: 0.1;" color-space="sRGB"
+  <!-- ИСПРАВЛЕНО: Добавлен обязательный параметр uiLoading: no для кастомизации или стандартной загрузки -->
+  <a-scene mindar-face="filterMinCF: 0.001; filterBeta: 0.1; uiLoading: no;" color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
 
@@ -47,8 +48,7 @@
       <a-asset-item id="glassesModel" src="../task1/assets/glasses_low_poly.glb"></a-asset-item>
     </a-assets>
 
-    <a-camera active="false" position="0 0 0"></a-camera>
-
+    <a-camera active="false" position="0 0 0" look-controls="enabled: false"></a-camera>
 
     <a-gltf-model src="#glassesModel" position="0 0 0" rotation="0 0 0" scale="1 1 1">
     </a-gltf-model>
