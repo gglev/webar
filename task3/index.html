@@ -2,13 +2,10 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebAR Task 3 - Face Tracking Glasses</title>
-
-  <script src="https://aframe.io"></script>
-  <script src="https://jsdelivr.net"></script>
-
+  <title>WebAR Task 3 - Face Tracking Mask</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>
   <style>
     body {
       margin: 0;
@@ -33,30 +30,31 @@
 </head>
 
 <body>
-  <a href="../index.html"
-    style="position:fixed; top:16px; left:16px; z-index:999; background:rgba(255,255,255,0.9); padding:8px 16px; border-radius:20px; text-decoration:none; color:#000; font-size:14px; font-weight:500; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">⬅
-    Меню</a>
-
   <div id="info">Посмотрите в фронтальную камеру</div>
 
-  <!-- ИСПРАВЛЕНО: Добавлен обязательный параметр uiLoading: no для кастомизации или стандартной загрузки -->
-  <a-scene mindar-face="filterMinCF: 0.001; filterBeta: 0.1; uiLoading: no;" color-space="sRGB"
+  <a-scene mindar-face="filterMinCF: 0.001; filterBeta: 0.1;" color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
 
     <a-assets>
-      <a-asset-item id="glassesModel" src="../task1/assets/glasses_low_poly.glb"></a-asset-item>
+      <a-asset-item id="headModel"
+        src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/examples/face-tracking/assets/sparkar/headOccluder.glb"></a-asset-item>
+      <a-asset-item id="maskModel" src="../task1/assets/model.glb"></a-asset-item>
     </a-assets>
 
-    <a-camera active="false" position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-camera active="false" position="0 0 0"></a-camera>
 
-    <a-gltf-model src="#glassesModel" position="0 0 0" rotation="0 0 0" scale="1 1 1">
-    </a-gltf-model>
+    <a-entity mindar-face-target="anchorIndex: 168">
+      <a-gltf-model mindar-face-occluder position="0 -0.25 0.15" rotation="0 0 0" scale="0.065 0.065 0.065"
+        src="#headModel"></a-gltf-model>
+    </a-entity>
 
+    <a-entity mindar-face-target="anchorIndex: 168">
+      <a-gltf-model src="/webar/task1/assets/model.glb" position="0 0.15 -0.7" rotation="0 0 0"
+        scale="0.15 0.15 0.15"></a-gltf-model>
+    </a-entity>
 
     <a-light type="ambient" intensity="0.9"></a-light>
     <a-light type="directional" intensity="0.7" position="0 1 1"></a-light>
   </a-scene>
 </body>
-
-</html>
