@@ -38,15 +38,13 @@
     device-orientation-permission-ui="enabled: false">
 
     <a-assets>
-      <a-asset-item id="glassesModel" src="glasses_low_poly.glb"></a-asset-item>
+      <a-asset-item id="glassesModel" src="assets/glasses_low_poly.glb"></a-asset-item>
     </a-assets>
 
     <a-camera active="false" position="0 0 0"></a-camera>
     <a-gltf-model src="#glassesModel" position="0 0 0" rotation="0 0 0" scale="1 1 1">
     </a-gltf-model>
 
-
-    <!-- Добавляем свет, чтобы очки выглядели объемными -->
     <a-light type="ambient" intensity="0.9"></a-light>
     <a-light type="directional" intensity="0.7" position="0 1 1"></a-light>
   </a-scene>
