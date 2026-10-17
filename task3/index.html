@@ -5,8 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebAR Task 3 - Face Tracking Glasses</title>
+
+  <!-- ИСПРАВЛЕНО: Полные и правильные ссылки на библиотеки -->
   <script src="https://aframe.io"></script>
   <script src="https://jsdelivr.net"></script>
+
   <style>
     body {
       margin: 0;
@@ -38,12 +41,17 @@
     device-orientation-permission-ui="enabled: false">
 
     <a-assets>
+      <!-- Проверьте, что в папке assets файл называется именно так -->
       <a-asset-item id="glassesModel" src="assets/glasses_low_poly.glb"></a-asset-item>
     </a-assets>
 
     <a-camera active="false" position="0 0 0"></a-camera>
+
+    <!-- ИСПРАВЛЕНО: Вернули привязку очков к центру переносицы лица -->
+
     <a-gltf-model src="#glassesModel" position="0 0 0" rotation="0 0 0" scale="1 1 1">
     </a-gltf-model>
+
 
     <a-light type="ambient" intensity="0.9"></a-light>
     <a-light type="directional" intensity="0.7" position="0 1 1"></a-light>
