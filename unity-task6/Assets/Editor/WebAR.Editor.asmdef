@@ -1,0 +1,1 @@
+{"name":"WebAR.Editor","references":["WebAR.Runtime","WebXR","Unity.XR.Management","Unity.XR.Management.Editor"],"includePlatforms":["Editor"]}

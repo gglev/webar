@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>WebAR Task 5 - Three.js PBR, UI & Controls</title>
   <style>
     body {
@@ -17,7 +17,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none; /* чтобы тапы сквозь оверлей шли в сцену */
+      pointer-events: none; /* события вне панели доступны сцене */
       z-index: 10;
     }
     #status-msg {
@@ -38,12 +38,17 @@
     #ar-ui {
       display: none; /* появится после размещения объекта */
       position: absolute;
-      bottom: 80px;
+      bottom: calc(84px + env(safe-area-inset-bottom));
+      flex-wrap: wrap;
+      justify-content: center;
+      width: min(440px, calc(100% - 24px));
       left: 50%;
       transform: translateX(-50%);
       gap: 12px;
       pointer-events: auto; /* кнопки кликабельны */
     }
+    #overlay-container > button { pointer-events: auto; }
+    :xr-overlay { background: transparent; }
     .ar-btn {
       background: rgba(28, 28, 30, 0.85);
       color: white;
@@ -78,10 +83,10 @@
 </head>
 <body>
   <div id="overlay-container">
-    <div id="status-msg">Нажмите START AR для запуска</div>
+    <div id="status-msg" role="status" aria-live="polite">Нажмите START AR для запуска</div>
     <div id="ar-ui">
       <button id="btn-color" class="ar-btn">🎨 Цвет</button>
-      <button id="btn-rotate" class="ar-btn">🔄 Вращение</button>
+      <button id="btn-rotate" class="ar-btn" aria-pressed="false">🔄 Вращение</button>
       <button id="btn-model" class="ar-btn">📦 Модель</button>
     </div>
   </div>

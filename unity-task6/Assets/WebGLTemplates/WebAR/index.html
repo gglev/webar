@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Задание 6 — Unity WebXR</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080d18;color:#edf5ff;font-family:system-ui,-apple-system,sans-serif}canvas{display:block;width:100%;height:100%;outline:none}#unity-container{position:fixed;inset:0}header{position:fixed;top:0;left:0;right:0;padding:22px 24px;pointer-events:none;background:linear-gradient(#080d18cc,transparent)}header a{color:#a5bdd4;pointer-events:auto;text-decoration:none;font-size:13px}h1{font-size:22px;margin:12px 0 7px}p{font-size:14px;line-height:1.5;margin:0;color:#a5bdd4}.panel{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(460px,calc(100% - 32px));text-align:center;padding:18px;border:1px solid #ffffff25;border-radius:18px;background:#111c2deb;backdrop-filter:blur(12px)}button{font:600 15px system-ui;border:0;border-radius:10px;padding:13px 24px;background:#53c8f7;color:#052135;cursor:pointer;margin-bottom:10px}button:disabled{opacity:.45;cursor:default}#loading{position:fixed;inset:0;display:grid;place-content:center;background:#080d18;text-align:center;z-index:5}progress{width:260px;height:10px;margin:20px 0;accent-color:#53c8f7}#error{color:#ffb3b3;white-space:pre-wrap;margin-top:12px}.badge{display:inline-block;font-size:11px;letter-spacing:1.5px;color:#53c8f7;border:1px solid #53c8f750;padding:5px 9px;border-radius:6px;margin-bottom:6px}#entervr{display:none}
+</style>
+</head>
+<body>
+<div id="unity-container"><canvas id="unity-canvas" tabindex="0" aria-label="Unity сцена с трёхмерным кубом"></canvas></div>
+<header><a href="../">← Все задания</a><br><h1>Unity · Viewer space</h1><p>Задание 6 · WebXR Exporter</p></header>
+<div class="panel"><button id="enterar" disabled>Запустить AR</button><button id="entervr" disabled>VR</button><p id="status">Проверяем поддержку WebXR…</p><p id="error" role="alert"></p></div>
+<div id="loading"><h2>Загрузка Unity</h2><progress id="progress" max="1" value="0"></progress><p id="load-label">Подготавливаем WebGL…</p></div>
+<script>
+var unityInstance = null;
+var supported = false;
+var canvas = document.getElementById('unity-canvas');
+var statusText = document.getElementById('status');
+var arButton = document.getElementById('enterar');
+function setSupported(value) {
+  supported=value; arButton.disabled=!value || !unityInstance;
+  statusText.textContent=value?'Куб появится перед камерой и будет следовать за взглядом.':'AR не поддерживается этим браузером. Доступен 3D-предпросмотр.';
+}
+document.addEventListener('onARSupportedCheck',e=>setSupported(e.detail.supported));
+if (!navigator.xr) setSupported(false);
+else navigator.xr.isSessionSupported('immersive-ar').then(setSupported).catch(()=>setSupported(false));
+arButton.addEventListener('click',()=>{if(unityInstance) unityInstance.Module.WebXR.toggleAR();});
+var config={
+ dataUrl:'Build/{{{ DATA_FILENAME }}}',
+ frameworkUrl:'Build/{{{ FRAMEWORK_FILENAME }}}',
+ codeUrl:'Build/{{{ CODE_FILENAME }}}',
+ streamingAssetsUrl:'StreamingAssets',companyName:'{{{ COMPANY_NAME }}}',productName:'{{{ PRODUCT_NAME }}}',productVersion:'{{{ PRODUCT_VERSION }}}',
+ devicePixelRatio:Math.min(window.devicePixelRatio||1,2),
+ showBanner:function(message,type){if(type==='error'){document.getElementById('error').textContent=message;}}
+};
+var script=document.createElement('script');script.src='Build/{{{ LOADER_FILENAME }}}';
+script.onload=()=>createUnityInstance(canvas,config,p=>{document.getElementById('progress').value=p;document.getElementById('load-label').textContent=Math.round(p*100)+'%';}).then(instance=>{
+ unityInstance=instance;document.getElementById('loading').style.display='none';setSupported(supported);canvas.focus();document.documentElement.dataset.unityReady='true';
+}).catch(message=>{document.getElementById('loading').style.display='none';document.getElementById('error').textContent=String(message);});
+script.onerror=()=>{document.getElementById('load-label').textContent='Не удалось загрузить Unity. Обновите страницу.';};document.body.appendChild(script);
+</script></body></html>

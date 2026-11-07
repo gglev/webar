@@ -1,0 +1,26 @@
+{
+  "unity": "6000.6.8f1",
+  "webxrExporter": "0.25.0",
+  "xrManagement": "4.5.3",
+  "build": {
+    "result": "Succeeded",
+    "bytes": 17530944,
+    "seconds": 93.215854,
+    "errors": 0,
+    "warnings": 9
+  },
+  "uncompressedBytes": 17530814,
+  "uncompressedMiB": 16.72,
+  "files": {
+    "index.html": 4373,
+    "Build/task6.loader.js": 27914,
+    "Build/task6.framework.js": 387774,
+    "Build/task6.wasm": 13372689,
+    "Build/task6.data": 3738064
+  },
+  "desktopWebGLTested": true,
+  "physicalMobileARTested": false,
+  "compression": "Disabled",
+  "decompressionFallback": false,
+  "threadsSupport": false
+}
